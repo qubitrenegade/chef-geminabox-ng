@@ -78,6 +78,10 @@ module GeminaboxNG
       node['geminabox-ng']['unicorn']['port'] || '8080'
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # I really don't know what you want from me...
+    # How is this any different than #unicorn_listen below?
+    # Silly.  Rubocop, you're drunk. go home.
     def unicorn_socket
       if node['geminabox-ng']['unicorn']['socket']['dir']
         File.join(
@@ -88,6 +92,7 @@ module GeminaboxNG
         File.join gib_homedir, node['geminabox-ng']['unicorn']['socket']
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def unicorn_http_addr
       "#{unicorn_host}:#{unicorn_port}"
