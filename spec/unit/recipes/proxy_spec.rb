@@ -43,6 +43,11 @@ describe 'geminabox-ng::proxy' do
       expect(chef_run).to install_package 'nginx'
     end
 
+    it 'starts and enables nginx' do
+      expect(chef_run).to start_service 'nginx'
+      expect(chef_run).to enable_service 'nginx'
+    end
+
     it 'removes the default config file' do
       expect(chef_run).to delete_file '/etc/nginx/conf.d/default.conf'
     end
