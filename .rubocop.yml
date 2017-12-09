@@ -10,5 +10,15 @@ Style/SpaceAroundOperators:
     - 'attributes/default.rb'
 
 Style/TrailingCommaInLiteral:
+  Enabled: false
   Exclude:
     - 'attributes/default.rb'
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+  
+Lint/PercentStringArray:
+  Enabled: false
+
+Style/UnneededPercentQ:
+  Enabled: false
