@@ -29,11 +29,12 @@ package 'nginx' do
   action :install
 end
 
-file File.join('/', 'etc', 'nginx', 'conf.d', 'default.conf') do
+file File.join(%w(/ etc nginx conf.d default.conf)) do
   action :delete
+  notifies :restart, 'service[nginx]', :delayed
 end
 
-template File.join('/', 'etc', 'nginx', 'conf.d', 'geminabox.conf') do
+template File.join(%w(/ etc nginx conf.d geminabox.conf)) do
   source 'nginx-site.conf.erb'
   action :create
   notifies :restart, 'service[nginx]', :delayed

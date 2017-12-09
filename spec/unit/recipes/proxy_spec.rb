@@ -38,5 +38,22 @@ describe 'geminabox-ng::proxy' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
+
+    it 'installs nginx' do
+       expect(chef_run).to install_package 'nginx'
+    end
+
+    it 'removes the default config file' do
+      expect(chef_run).to delete_file '/etc/nginx/conf.d/default.conf'
+    end
+
+    it 'creates geminabox.conf file' do
+      cfg_file = '/etc/nginx/conf.d/geminabox.conf'
+      expect(chef_run).to create_template cfg_file
+      expect(chef_run).to render_file(cfg_file).with_content { |content|
+        expect(content).to match %r{proxy_pass\s+http:\/\/127.0.0.1:8080;}
+        expect(content).to include 'listen 8000 default deferred;'
+      }
+    end
   end
 end

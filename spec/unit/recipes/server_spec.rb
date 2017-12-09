@@ -65,7 +65,7 @@ describe 'geminabox-ng::server' do
         expect(content).to include 'Geminabox.build_legacy = false'
         expect(content).to include 'Geminabox.rubygems_proxy = true'
         expect(content).to include 'Geminabox.allow_remote_failure = true'
-        expect(content).to include %w|Geminabox.data = '/opt/geminabox/data'|
+        expect(content).to include %q|Geminabox.data = '/opt/geminabox/data'|
       }
     end
 
@@ -81,7 +81,8 @@ describe 'geminabox-ng::server' do
       expect(chef_run).to render_file(cfg_file).with_content { |content|
         expect(content).to include 'chefspec'
         expect(content).to include %q|working_directory '/opt/geminabox'|
-        expect(content).to include %q|listen '8080'|
+        expect(content).to include %q|host '127.0.0.1'|
+        expect(content).to include %q|port '8080'|
         expect(content).to include 'preload_app true'
         expect(content).to include 'copy_on_write_friendly = true'
       }
