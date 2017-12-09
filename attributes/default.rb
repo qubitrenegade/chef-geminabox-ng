@@ -38,9 +38,17 @@ default['geminabox-ng'] = {
     'timeout' => 30,
     'preload_app' => true,
     'cow_friendly' => true,
+    # Optionally, set a socket listener
+    # to create socket in homedir
+    # 'socket' => 'unicorn.socket'
+    # to create a socket in an alternate directory
+    # 'socket' => {
+    #   'dir' => '/var/run',
+    #   'file_name' => 'unicorn.socket',
+    # }
   },
 
-  # By default, we'll run all redipes in the cookbook,
+  # By default, we'll run all recipes in the cookbook,
   # set to false to disable a recipe
   # default['geminabox-ng']['run_list']['user'] = false
   'run_list' => {
