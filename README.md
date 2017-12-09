@@ -10,4 +10,3 @@ Largely inspired by previous versions:
 
 And modernized, using [ruby_rbenv](https://github.com/sous-chefs/ruby_rbenv) and [poise-service](https://github.com/poise/poise-service)
 
-Currently a work in progress as Poise seems unable to start the service...
