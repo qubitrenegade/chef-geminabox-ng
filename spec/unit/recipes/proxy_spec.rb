@@ -40,7 +40,7 @@ describe 'geminabox-ng::proxy' do
     end
 
     it 'installs nginx' do
-       expect(chef_run).to install_package 'nginx'
+      expect(chef_run).to install_package 'nginx'
     end
 
     it 'removes the default config file' do
