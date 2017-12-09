@@ -1,0 +1,14 @@
+Metrics/LineLength:
+  Max: 120
+
+Style/ExtraSpacing:
+  Exclude:
+    - 'attributes/default.rb'
+
+Style/SpaceAroundOperators:
+  Exclude:
+    - 'attributes/default.rb'
+
+Style/TrailingCommaInLiteral:
+  Exclude:
+    - 'attributes/default.rb'
