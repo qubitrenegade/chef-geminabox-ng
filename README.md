@@ -107,6 +107,12 @@ Pull requests are very welcome! Make sure your patches are well tested.
 
 This cookbook comes with a full suite of ChefSpec and InSpec tests.  All patches must pass existing tests.  Additional tests required for new features. To run tests use `kitchen test`
 
+## TODO:
+
+- Get travis to work...
+- Update Nginx template to be confiurable
+- Update Nginx template to handle ssl
+
 ## License and Author
 
 - Author:: qubitrenegade ([qbitrenegade@gmail.com](mailto:qbitrenegade@gmail.com))
