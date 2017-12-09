@@ -90,7 +90,7 @@ module GeminaboxNG
     end
 
     def unicorn_http_addr
-      "#{unicorn_host}:#{node_unicorn_port}"
+      "#{unicorn_host}:#{unicorn_port}"
     end
 
     def unicorn_listen
