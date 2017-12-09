@@ -39,6 +39,9 @@ default['geminabox-ng'] = {
     'preload_app' => true,
     'cow_friendly' => true,
     # Optionally, set a socket listener
+    # Setting this will override the http listener,
+    # you'll need to generate a different nginx config
+    #
     # to create socket in homedir
     # 'socket' => 'unicorn.socket'
     # to create a socket in an alternate directory

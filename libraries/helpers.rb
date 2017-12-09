@@ -79,22 +79,13 @@ module GeminaboxNG
     end
 
     def unicorn_socket
-      cfg = Pathname(node['geminabox-ng']['unicorn']['socket'])
-      if cfg.absolute?
-        if cfg.exist?
-          node['geminabox-ng']['unicorn']['socket']
-        else
-          Chef::Log.warn 'Socket not found, falling back to http listener'
-          unicorn_http_addr
-        end
+      if node['geminabox-ng']['unicorn']['socket']['dir']
+        File.join(
+          node['geminabox-ng']['unicorn']['socket']['dir'],
+          node['geminabox-ng']['unicorn']['socket']['file_name']
+        )
       else
-        home_path = Pathaname(File.join(gib_home_dir, node['geminabox-ng']['unicorn']['socket']))
-        if home_path.exist?
-          home_path.to_s
-        else
-          Chef::Log.warn 'Socket not found, falling back to http listener'
-          unicorn_http_addr
-        end
+        File.join gib_homedir, node['geminabox-ng']['unicorn']['socket']
       end
     end
 
