@@ -1,4 +1,4 @@
-language: ruby
+sudo: required
 dist: trusty
 
 addons:
@@ -19,7 +19,7 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}
 
 matrix:
   include:
