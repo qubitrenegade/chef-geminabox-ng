@@ -1,4 +1,6 @@
-rvm: 2.2
+language: ruby
+rvm:
+  - 2.4.*
 
 sudo: required
 services: docker
