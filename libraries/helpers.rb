@@ -34,21 +34,21 @@ module GeminaboxNG
     def gib_config_file
       File.join(
         node['geminabox-ng']['user']['home_dir'],
-        'config.ru',
+        'config.ru'
       )
     end
 
     def unicorn_config_file
       File.join(
-        node['geminabox-ng']['user']['home_dir'], 
-        'geminabox.unicorn.app',
+        node['geminabox-ng']['user']['home_dir'],
+        'geminabox.unicorn.app'
       )
     end
 
     def gib_data_dir
       node['geminabox-ng']['data_dir'] || File.join(
         node['geminabox-ng']['user']['home_dir'],
-        'data',
+        'data'
       )
     end
 
@@ -59,7 +59,7 @@ module GeminaboxNG
     def unicorn_path
       File.join(
         node['geminabox-ng']['user']['home_dir'],
-        '.rbenv/shims/unicorn',
+        '.rbenv/shims/unicorn'
       )
     end
   end

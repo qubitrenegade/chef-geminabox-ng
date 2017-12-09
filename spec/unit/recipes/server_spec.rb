@@ -44,7 +44,7 @@ describe 'geminabox-ng::server' do
         .with(
           owner: 'geminabox',
           path: '/opt/geminabox/data',
-          recursive: true,
+          recursive: true
         )
     end
 
@@ -53,7 +53,7 @@ describe 'geminabox-ng::server' do
         expect(chef_run).to install_rbenv_gem(gem)
           .with(
             user: 'geminabox',
-            rbenv_version: '2.4.2',
+            rbenv_version: '2.4.2'
           )
       end
     end
@@ -74,8 +74,8 @@ describe 'geminabox-ng::server' do
       expect(chef_run).to create_template(cfg_file)
         .with(
           user: 'geminabox',
-         group: 'geminabox',
-          mode: '0644',
+          group: 'geminabox',
+          mode: '0644'
         )
 
       expect(chef_run).to render_file(cfg_file).with_content { |content|
@@ -92,23 +92,3 @@ describe 'geminabox-ng::server' do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
