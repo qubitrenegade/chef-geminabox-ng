@@ -2,34 +2,57 @@
 # rubocop:disable Metrics/LineLength
 default['geminabox-ng'] = {
   'user' => {
-    'name'        => 'geminabox',             # use a default user of geminabox
-    'home_dir'    => '/opt/geminabox',        # Set geminabox dir
-    # 'data_dir'    => nil, # optionally configurable datadir, defaults to "#{home_dir}/data"
+    # set a default user for geminabox service,
+    # this should be different than nginx server
+    'name'        => 'geminabox',             
+    # Set geminabox home dir
+    'home_dir'    => '/opt/geminabox',        
+    # optionally configurable datadir, defaults to "#{home_dir}/data"
+    # 'data_dir'    => nil, 
   },
 
-  'config' => {                               # Set config options for geminabox server, see https://github.com/geminabox/geminabox
+  # Set config options for geminabox server, 
+  # see https://github.com/geminabox/geminabox
+  'config' => {                               
     'build_legacy'    => false,
     'rubygems_proxy'  => true,
     'allow_remote_failure' => true,
   },
-  'ruby_version'  => '2.4.2',           # default to the latest as of this writing
 
-  'gems' => {                           # list of gems to install, additional gems can be added here.
+  # default to the latest stable ruby as of the writing of this cookbook
+  'ruby_version'  => '2.4.2',           
+
+  # list of gems to install, 
+  # additional gems can be added as environment/node attributes.
+  'gems' => {     
     'geminabox'   => true,
     'unicorn'     => true,
   },
+
+  # Unicorn cofiguration.  
+  # For config options see: https://bogomips.org/unicorn/Unicorn/Configurator.html
   'unicorn' => {
     'worker_processes' => 4,
     'port' => '8080',
+    # This can be used for debugging purposes.  defaults to 127.0.0.1
+    # 'host' => '0.0.0.0',              
     'timeout' => 30,
     'preload_app' => true,
     'cow_friendly' => true,
   },
 
-  'run_list' => {                       # By default, we'll run all redipes in the cookbook, set to false to disable a recipe
-    'user'        => true,              # creates the geminabox user, disable if you create users via other processes
-    'ruby'        => true,              # Installs ruby using rbenv, disable to use another ruby install method
-    'server'      => true,              # Installs and configures geminabox, no sense disabling since this is the heart of the cookbook.
-    'proxy'       => true,              # Sets up a reverse proxy to webrick service.  Currently only supports Nginx
+  # By default, we'll run all redipes in the cookbook, 
+  # set to false to disable a recipe
+  # default['geminabox-ng']['run_list']['user'] = false
+  'run_list' => {
+    # creates the geminabox user, disable if you create users via other processes
+    'user'        => true,
+    # Installs ruby using rbenv, disable to use another ruby install method
+    'ruby'        => true,              
+    # Installs and configures geminabox, 
+    # no sense disabling since this is the heart of the cookbook.
+    'server'      => true,              
+    # Sets up a reverse proxy to webrick service.  Currently only supports Nginx
+    'proxy'       => true,              
   },
 }

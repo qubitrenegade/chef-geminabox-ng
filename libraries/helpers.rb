@@ -62,6 +62,12 @@ module GeminaboxNG
         '.rbenv/shims/unicorn'
       )
     end
+
+    def unicorn_listen
+      node['geminabox-ng']['unicorn']['socket'] ?
+        node['geminabox-ng']['unicorn']['socket'] :
+        "#{node['geminabox-ng']['unicorn']['host'] || '127.0.0.1'}:#{node['geminabox-ng']['unicorn']['port']}"
+    end
   end
 end
 
