@@ -24,3 +24,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+package 'nginx' do
+  action :install
+end
+
+file File.join('/', 'etc', 'nginx', 'conf.d', 'default.conf') do
+  action :delete
+end
+
+template File.join('/', 'etc', 'nginx', 'conf.d', 'geminabox.conf') do
+  source 'nginx-site.conf.erb'
+  action :create
+  notifies :restart, 'service[nginx]', :delayed
+end
+
+service 'nginx' do
+  action [:enable, :start]
+end

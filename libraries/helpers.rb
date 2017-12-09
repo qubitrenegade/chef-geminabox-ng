@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 #
 # Cookbook:: geminabox-ng
-# Recipe:: server
-#
-# Install and configure the geminabox server
+# Library:: helper
 #
 # The MIT License (MIT)
 #
@@ -27,52 +25,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-username = gib_username
-data_dir = gib_data_dir
-unicorn_config = unicorn_config_file
-geminabox_config = gib_config_file
-unicorn = unicorn_path
-rack_env = gib_rack_env
+module GeminaboxNG
+  module Helpers
+    def gib_username
+      node['geminabox-ng']['user']['name']
+    end
 
-# Create datadir
-directory 'geminabox data directory' do
-  owner username
-  path data_dir
-  recursive true
-  action :create
-end
+    def gib_config_file
+      File.join(
+        node['geminabox-ng']['user']['home_dir'],
+        'config.ru',
+      )
+    end
 
-# install requisite gems
-node['geminabox-ng']['gems'].each do |gem, include|
-  next unless include
-  rbenv_gem gem do
-    user username
-    rbenv_version node['geminabox-ng']['ruby_version']
-    action :install
+    def unicorn_config_file
+      File.join(
+        node['geminabox-ng']['user']['home_dir'], 
+        'geminabox.unicorn.app',
+      )
+    end
+
+    def gib_data_dir
+      node['geminabox-ng']['data_dir'] || File.join(
+        node['geminabox-ng']['user']['home_dir'],
+        'data',
+      )
+    end
+
+    def gib_rack_env
+      node['geminabox-ng']['unicorn']['rack_env'] || 'production'
+    end
+
+    def unicorn_path
+      File.join(
+        node['geminabox-ng']['user']['home_dir'],
+        '.rbenv/shims/unicorn',
+      )
+    end
   end
 end
 
-# geminabox config
-template geminabox_config do
-  user username
-  group username
-  mode '0644'
-  action :create
-end
-
-# Unicorn config
-template unicorn_config do
-  source 'unicorn.app.erb'
-  user username
-  group username
-  mode '0644'
-  action :create
-end
-
-# Start geminabox
-poise_service 'geminabox' do
-  command "#{unicorn} --config-file #{unicorn_config} #{geminabox_config}"
-  user username
-  environment RACK_ENV: rack_env
-  action :enable
-end
+Chef::Recipe.send(:include, GeminaboxNG::Helpers)
+Chef::Mixin::Template.send(:include, GeminaboxNG::Helpers)
+Chef::Mixin::Template::TemplateContext.send(:include, GeminaboxNG::Helpers)
+Chef::Resource::Directory.send(:include, GeminaboxNG::Helpers)

@@ -6,5 +6,5 @@ Geminabox.build_legacy = <%= node['geminabox-ng']['config']['build_legacy'] %>
 Geminabox.rubygems_proxy = <%= node['geminabox-ng']['config']['rubygems_proxy'] %>
 Geminabox.allow_remote_failure = <%= node['geminabox-ng']['config']['allow_remote_failure'] %>
 
-Geminabox.data = '<%= node['geminabox-ng']['user']['data_dir'] || "#{node['geminabox-ng']['user']['home_dir']}/data" %>'
+Geminabox.data = '<%= gib_data_dir %>'
 run Geminabox::Server

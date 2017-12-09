@@ -65,7 +65,7 @@ describe 'geminabox-ng::server' do
         expect(content).to include 'Geminabox.build_legacy = false'
         expect(content).to include 'Geminabox.rubygems_proxy = true'
         expect(content).to include 'Geminabox.allow_remote_failure = true'
-        expect(content).to include 'Geminabox.data = /opt/geminabox/data'
+        expect(content).to include %w|Geminabox.data = '/opt/geminabox/data'|
       }
     end
 
