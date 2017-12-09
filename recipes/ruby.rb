@@ -27,15 +27,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# rbenv_user_install node['geminabox-ng']['user']['name']
-rbenv_system_install 'because user seems not to work?'
+rbenv_user_install node['geminabox-ng']['user']['name']
 
 rbenv_ruby node['geminabox-ng']['ruby_version'] do
-  # user node['geminabox-ng']['user']['name']
+  user node['geminabox-ng']['user']['name']
   verbose true
   action :install
 end
 
 rbenv_global node['geminabox-ng']['ruby_version'] do
-  # user node['geminabox-ng']['user']['name']
+  user node['geminabox-ng']['user']['name']
 end

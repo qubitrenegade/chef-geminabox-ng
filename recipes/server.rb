@@ -39,7 +39,7 @@ end
 node['geminabox-ng']['gems'].each do |gem, include|
   next unless include
   rbenv_gem gem do
-    # user node['geminabox-ng']['user']['name']
+    user node['geminabox-ng']['user']['name']
     rbenv_version node['geminabox-ng']['ruby_version']
     action :install
   end
@@ -66,7 +66,7 @@ end
 
 # Start geminabox
 poise_service 'geminabox' do
-  command "geminabox unicorn --config-file #{unicorn_config} #{geminabox_config}"
+  command "#{node['geminabox-ng']['user']['home_dir']}/.rbenv/shims/unicorn --config-file #{unicorn_config} #{geminabox_config}"
   user node['geminabox-ng']['user']['name']
   environment RACK_ENV: node['geminabox-ng']['unicorn']['rack_env'] || 'production'
   action :enable
