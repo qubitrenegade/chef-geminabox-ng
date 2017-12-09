@@ -9,7 +9,7 @@ control 'nginx' do
   desc 'Nginx should be configured'
   impact 1.0
 
-  describe package('nginx') do 
+  describe package('nginx') do
     it { should be_installed }
   end
 

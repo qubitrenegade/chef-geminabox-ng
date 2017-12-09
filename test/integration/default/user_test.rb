@@ -6,8 +6,7 @@
 # found at http://inspec.io/docs/reference/resources/
 
 control 'Geminabox User' do
-
-  describe user('geminabox')do
+  describe user('geminabox') do
     it { should exist }
     its('home') { should eq '/opt/geminabox' }
     its('shell') { should eq '/bin/bash' }
