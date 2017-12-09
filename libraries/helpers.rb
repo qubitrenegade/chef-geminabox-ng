@@ -25,29 +25,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'pathname'
+
 module GeminaboxNG
+  # Helpers for geminabox-ng cookbook
   module Helpers
     def gib_username
       node['geminabox-ng']['user']['name']
     end
 
+    def gib_homedir
+      node['geminabox-ng']['user']['home_dir']
+    end
+
     def gib_config_file
       File.join(
-        node['geminabox-ng']['user']['home_dir'],
+        gib_homedir,
         'config.ru'
       )
     end
 
     def unicorn_config_file
       File.join(
-        node['geminabox-ng']['user']['home_dir'],
+        gib_homedir,
         'geminabox.unicorn.app'
       )
     end
 
     def gib_data_dir
       node['geminabox-ng']['data_dir'] || File.join(
-        node['geminabox-ng']['user']['home_dir'],
+        gib_homedir,
         'data'
       )
     end
@@ -58,15 +65,49 @@ module GeminaboxNG
 
     def unicorn_path
       File.join(
-        node['geminabox-ng']['user']['home_dir'],
+        gib_homedir,
         '.rbenv/shims/unicorn'
       )
     end
 
+    def unicorn_host
+      node['geminabox-ng']['unicorn']['host'] || '127.0.0.1'
+    end
+
+    def unicorn_port
+      node['geminabox-ng']['unicorn']['port'] || '8080'
+    end
+
+    def unicorn_socket
+      cfg = Pathname(node['geminabox-ng']['unicorn']['socket'])
+      if cfg.absolute?
+        if cfg.exist?
+          node['geminabox-ng']['unicorn']['socket']
+        else
+          Chef::Log.warn 'Socket not found, falling back to http listener'
+          unicorn_http_addr
+        end
+      else
+        home_path = Pathaname(File.join(gib_home_dir, node['geminabox-ng']['unicorn']['socket']))
+        if home_path.exist?
+          home_path.to_s
+        else
+          Chef::Log.warn 'Socket not found, falling back to http listener'
+          unicorn_http_addr
+        end
+      end
+    end
+
+    def unicorn_http_addr
+      "#{unicorn_host}:#{node_unicorn_port}"
+    end
+
     def unicorn_listen
-      node['geminabox-ng']['unicorn']['socket'] ?
-        node['geminabox-ng']['unicorn']['socket'] :
-        "#{node['geminabox-ng']['unicorn']['host'] || '127.0.0.1'}:#{node['geminabox-ng']['unicorn']['port']}"
+      if node['geminabox-ng']['unicorn']['socket']
+        unicorn_socket
+      else
+        unicorn_http_addr
+      end
     end
   end
 end

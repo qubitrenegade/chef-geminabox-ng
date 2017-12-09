@@ -1,6 +1,11 @@
 Metrics/LineLength:
   Max: 120
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/unit/recipes/*_spec.rb'
+    - 'spec/*/*/*_spec.rb'
+
 Style/ExtraSpacing:
   Exclude:
     - 'attributes/default.rb'
