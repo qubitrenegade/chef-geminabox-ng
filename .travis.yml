@@ -9,8 +9,10 @@ addons:
       - chefdk
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1404
-  - INSTANCE=default-centos-69
+  - INSTANCE=ubuntu-14
+  - INSTANCE=ubuntu-16
+  - INSTANCE=centos-6
+  - INSTANCE=centos-7
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
