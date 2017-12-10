@@ -1,6 +1,7 @@
 # geminabox-ng: Gem in a Box Cookbook
 
-[![Build Status](https://travis-ci.org/qubitrenegade/chef-geminabox-ng.svg?branch=master)](https://travis-ci.org/qubitrenegade/chef-geminabox-ng)
+[![Build Status](https://travis-ci.org/qubitrenegade/chef-geminabox-ng.svg?branch=master)](https://travis-ci.org/qubitrenegade/chef-geminabox-ng) [![Maintainability](https://api.codeclimate.com/v1/badges/2d4143629249e19cca24/maintainability)](https://codeclimate.com/github/qubitrenegade/chef-geminabox-ng/maintainability) [![Dependency Status](https://beta.gemnasium.com/badges/github.com/qubitrenegade/chef-geminabox-ng.svg)](https://beta.gemnasium.com/projects/github.com/qubitrenegade/chef-geminabox-ng) 
+
 
 Opinionated Cookbook to install and Configure [Gem in a Box](https://github.com/geminabox/geminabox)
 
