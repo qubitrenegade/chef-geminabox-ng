@@ -24,5 +24,7 @@ script: KITCHEN_LOCAL_YAML=.kitchen.yml kitchen verify ${INSTANCE}
 matrix:
   include:
     - script:
-      - chef exec delivery local all
+      - chef exec delivery local unit
+      - chef exec delivery local lint
+      - chef exec delivery local syntax
       env: UNIT_AND_LINT=1
