@@ -31,7 +31,7 @@ rbenv_user_install node['geminabox-ng']['user']['name']
 
 rbenv_ruby node['geminabox-ng']['ruby_version'] do
   user node['geminabox-ng']['user']['name']
-  verbose true
+  verbose node['geminabox-ng']['debug_ruby_install']
   action :install
 end
 

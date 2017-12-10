@@ -30,14 +30,15 @@ platforms:
   - name: centos-7
     driver:
       image: dokken/centos-7
-      # pid_one_command: /usr/lib/systemd/systemd
       intermediate_instructions:
-        - RUN /bin/yum install epel-release
+              - RUN /bin/yum install -y epel-release
 
   - name: centos-6
     driver:
       image: dokken/centos-6
       pid_one_command: /sbin/init
+      intermediate_instructions:
+              - RUN /bin/yum install -y epel-release
 
 suites:
   - name: default
