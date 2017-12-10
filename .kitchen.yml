@@ -24,13 +24,15 @@ platforms:
 
   - name: ubuntu-14.04
     driver:
-      pid_one_command: /sbin/init
       image: dokken/ubuntu-14.04
+      pid_one_command: /sbin/init
 
   - name: centos-7
     driver:
       image: dokken/centos-7
       pid_one_command: /bin/systemd
+      intermediate_instructions:
+        - RUN /bin/yum install epel-release
 
   - name: centos-6
     driver:
