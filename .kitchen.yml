@@ -19,29 +19,19 @@ verifier:
 platforms:
   - name: ubuntu-16.04
     driver:
-      pid_one_command: /usr/lib/systemd/systemd
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
-      volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro # required by systemd
+      image: dokken/ubuntu-16.04
 
   - name: ubuntu-14.04
     driver:
-      pid_one_command: /sbin/init
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
+      image: dokken/ubuntu-14.04
 
   - name: centos-7
     driver:
-      pid_one_command: /usr/lib/systemd/systemd
-      volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro # required by systemd
+      image: dokken/centos-7
 
-  - name: centos-6.9
+  - name: centos-6
     driver:
-      pid_one_command: /sbin/init
-      intermediate_instructions:
-        - RUN /bin/yum install nginx 
+      image: dokken/centos-6
 
 suites:
   - name: default
