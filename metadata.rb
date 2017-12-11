@@ -21,7 +21,7 @@ issues_url 'https://github.com/qubitrenegade/geminabox-ng/issues'
 # `View Source` link will be displayed on this cookbook's page when uploaded to
 # a Supermarket.
 #
-source_url 'https://github.com/qubitrenegade/geminabox-ng'
+source_url 'https://github.com/qubitrenegade/chef-geminabox-ng/tree/v0.1.0'
 
 depends 'ruby_rbenv'
 depends 'poise-service'
