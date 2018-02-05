@@ -21,6 +21,8 @@ platforms:
     driver:
       image: dokken/ubuntu-16.04
       pid_one_command: /bin/systemd
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro # required by systemd
 
   - name: ubuntu-14.04
     driver:
@@ -28,17 +30,29 @@ platforms:
       pid_one_command: /sbin/init
 
   - name: centos-7
+    attributes:
+      geminabox-ng:
+        run_list:
+          proxy: false
     driver:
       image: dokken/centos-7
       intermediate_instructions:
-              - RUN /bin/yum install -y epel-release
+        - RUN /bin/yum install -y epel-release
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro # required by systemd
 
   - name: centos-6
+    attributes:
+      geminabox-ng:
+        run_list:
+          proxy: false
     driver:
       image: dokken/centos-6
       pid_one_command: /sbin/init
-      intermediate_instructions:
-              - RUN /bin/yum install -y epel-release
+      attributes:
+        geminabox-ng:
+          run_list:
+            nginx: false
 
 suites:
   - name: default
